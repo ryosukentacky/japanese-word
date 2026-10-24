@@ -1,0 +1,69 @@
+# 再現状況と不足事項
+
+## 保持した内容
+- 既存単語カードHTMLを `chats/vocabulary.html` と `originals/vocabulary_original.html` に元のバイト列のまま保存。
+- 3件のチャットHTMLを `chats/` に保存し、元HTMLを `originals/` に保存。
+- チャットHTML内のbase64埋込画像を `assets/images/` に実ファイルとして抽出し、元の画像タグ位置から参照。
+- 既存HTMLの本文は書き換えず、画像参照先と画像表示を妨げるCSPメタタグのみ変更。
+
+## 未再現・要確認
+- 外部URLの画像はローカル取得できていません。GitHub Pagesで表示されるかは接続先に依存します。
+- チャットHTMLにJavaScriptの操作ロジックが含まれないため、ChatGPT固有の問題・スライダー・グラフの動作を完全再現したとはいえません。
+- PDFとの見た目の照合は未実施（元PDF未提供）。
+- iPhoneとPCの実機動作確認は未実施。
+- 元ファイル同士で内容が重複していても削除・統合していません。
+
+## ファイル別画像検査
+
+### chat_1.html
+- imgタグ: 14個
+- 埋込画像をローカル保存: 2個
+- 外部画像URL: 12件（ユニーク）
+- 未取得: https://images.openai.com/static-rsc-4/Bv4MEg9N8KK_U4Vns8ucO-QYQxcEoFEJFAACTI7dUp7oIDRCQ6fwzEp5fNpEO2-PmZt_IyktLv-7C7XAi9cDNC608HASrtcUzhfEkRmJSh_KW2EFz6ZZLqvvYlpA1VmJ-WRL9Rf4I5ubXdsKvrKoKASQxhNtkdcnRru_i3tmKRc?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/IbpjKUsLoWQBstqbRzTMVHYCrxPrBfLPtDWZvBrHERdqO8Gxcw2ze-tvAHk65Gv30MPaN4ssd7j6FY3AZkT8mKNEj5kkmMqeGiTo4TcNyDQIX3BSV_TS4kPv5AcS9QlAtIr2Bxphv6vMA2thUdvZBYVIpmXD-qBuAacWZDZ_jh05LLc_sp4SMWv-vtYabwiu?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/LtOhOS-Tpb0liPY3nvcz01vwJ2Z83LY5VNZM64RsSXaSF-JExoA4dRRBt42Nv9pg3ZPiRNnnXD_7EsrUt70zknY285mqwOOkSMeedLZSsdsP5axAzVl7SVfDDU2YOr5bse5ObyhmSlujNw1z9SzWQmkda4nn9PpLRbAS-ItG5sM?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/Nx0soRo3DFaluGKs--IARt1z9EDcW6UKAHn-bP3EWn2vU_w9sNkX-xmPan9uAWyRv2xpOpEffTiymLHgSE20lSrlAj0IieV2TxAMlSIlnGFbGe_Py2RZyedvd-EYqEy5m8FGl212ahq_-J-PgdvhFqI8OhnwTZ_qa6AHQw9Gja0?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/VmD5HIYg4AtL_xZixb59Js9HC6W6Ip8oHx0AXYm_dokeHhRRRAa4SZEXH824dex4MIvFix45yS46tdMh3BHsoLVBM1zy92SBFzyhVJpzgmIDpsIzBAwh3ePJIeZg-FYqVfVpGtuQQ2dxyWYmlzcKmZsNa1_dYxROh4tKA7YeJyLkwVYZr8QD2HJhEpK89ax-?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/_YBT7qreFi9_Y2YVsaHA8vCFZl3fDKXo8t0Dq-HPDc-lb88H-NWhbKPyaQrHMfWi4Pc8fhxre2je7Wt4bjHZXIMmEHPJ9o4SHvp-th5wX2S8zbAdT_UkDj2t9wYEZt3lQRqsIc0XImWbsXFL9hniIx3HusKviYo1bMweHvBNZ-o?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/frtlbbduaaGpE3w86JRxliP6403MHIWN7RF0CERdLb47C5uocX5t0A5IVRJXpVF4X6IiuoDX9atmimw8Fm-LaQGGDm-kTw_MXeZXj4x1FabfwNpPdQ6sglSF3EKqPzw_oLCyRZ-jK4nde2iLa3ZkK4M5nA6s0UR3DcrkWLVbs7Y?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/l1ZY-okAjwQp_NR6PzOo7dj53HnvRa9YY_XqcYGA4v2NobVYNG5jgqxFiTckPbfCvlYJy0osGyvKOcyseIfy9SNPd-Cz8C4mfC7aElx2MQqBXl4D-QJP3kVihVzdSwsVRn_227qCGSJO38nNfX9usmhODARhp-GzvexNLP8xZUs?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/l6QZWSHy2OZSCGFtBi7cvbZBwSgFSQNokdSYwVg9ssProoXRUSE-nNMYpXShSeWDEO0TlWgTJtcB5BohLlSE5NRMSQzyIEY4vgXssu_md22uaKkXBNUQ-CkAHb6UE4nV4KMuFch6VqHK-c1ol0wNRnW0Tl9cqnPlSUr3LzpEUsI?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/nrHmqPiV1-YA4i0XLKjOVoQ2lK_22OkmQUO5deWqYhZbP5mxIshpf0CBM8lcTWrv2lX1PYhTz7MT7O6n-CcFJll8PPUWmiAhDrQg-Dcp5pMyMLb8nLkAAp-cp6OGe8rgFMJpRktuMRqDt5SrenGBHrlBtMOeWIB303irn45pn7YRUlKa1sT3ft8ps6-vf0kq?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/q1HRAAKvlo_77sjGLtgV29npFWZSBT-8r-3GE7kXfWndlNhULeVWUPQDdS7MHmYhfzQk8y7p9kPDT-FieWSFQC8zi7UytusUJLJKTb4FQ4auuME2nAAFvBKpt09oCilumZ81RWi-bhAZ7AJRA7vKo5vd5yDGY0E3qG2BpDDDr8M?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/zfa-aDfc-K4DwkMtm8SRBuaLij_5D8YdhegMorC0ZXeLrc-u7ub0TtRL4aGudeoLVUJJ8DmK9nnWK1wkFoFidQnaaWjooXqLvVuG6Ge8uN-uyXy4sp3xCi52l5j5jK5kf2S7n9iIrHwEvSVqMfTifcLj0WaaoZEuxxshRbA70fk?purpose=inline
+
+### chat_2.html
+- imgタグ: 14個
+- 埋込画像をローカル保存: 1個
+- 外部画像URL: 13件（ユニーク）
+- 未取得: https://images.openai.com/static-rsc-4/Bv4MEg9N8KK_U4Vns8ucO-QYQxcEoFEJFAACTI7dUp7oIDRCQ6fwzEp5fNpEO2-PmZt_IyktLv-7C7XAi9cDNC608HASrtcUzhfEkRmJSh_KW2EFz6ZZLqvvYlpA1VmJ-WRL9Rf4I5ubXdsKvrKoKASQxhNtkdcnRru_i3tmKRc?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/IbpjKUsLoWQBstqbRzTMVHYCrxPrBfLPtDWZvBrHERdqO8Gxcw2ze-tvAHk65Gv30MPaN4ssd7j6FY3AZkT8mKNEj5kkmMqeGiTo4TcNyDQIX3BSV_TS4kPv5AcS9QlAtIr2Bxphv6vMA2thUdvZBYVIpmXD-qBuAacWZDZ_jh05LLc_sp4SMWv-vtYabwiu?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/LtOhOS-Tpb0liPY3nvcz01vwJ2Z83LY5VNZM64RsSXaSF-JExoA4dRRBt42Nv9pg3ZPiRNnnXD_7EsrUt70zknY285mqwOOkSMeedLZSsdsP5axAzVl7SVfDDU2YOr5bse5ObyhmSlujNw1z9SzWQmkda4nn9PpLRbAS-ItG5sM?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/Nx0soRo3DFaluGKs--IARt1z9EDcW6UKAHn-bP3EWn2vU_w9sNkX-xmPan9uAWyRv2xpOpEffTiymLHgSE20lSrlAj0IieV2TxAMlSIlnGFbGe_Py2RZyedvd-EYqEy5m8FGl212ahq_-J-PgdvhFqI8OhnwTZ_qa6AHQw9Gja0?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/VmD5HIYg4AtL_xZixb59Js9HC6W6Ip8oHx0AXYm_dokeHhRRRAa4SZEXH824dex4MIvFix45yS46tdMh3BHsoLVBM1zy92SBFzyhVJpzgmIDpsIzBAwh3ePJIeZg-FYqVfVpGtuQQ2dxyWYmlzcKmZsNa1_dYxROh4tKA7YeJyLkwVYZr8QD2HJhEpK89ax-?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/_YBT7qreFi9_Y2YVsaHA8vCFZl3fDKXo8t0Dq-HPDc-lb88H-NWhbKPyaQrHMfWi4Pc8fhxre2je7Wt4bjHZXIMmEHPJ9o4SHvp-th5wX2S8zbAdT_UkDj2t9wYEZt3lQRqsIc0XImWbsXFL9hniIx3HusKviYo1bMweHvBNZ-o?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/aibNG-ufG_rzpgJgdVNNBmB3KiaijbcUiJCosOAx1mTwNk3NtdcGntiVoPRmM2GFqpDE-CewkonVaIaFAnBeRmWiJl9PTHnE4CWp3hLN2m8XhEKyhJNJIg_1um_wUwtPMngLnKr45s6D08zaFwfY-poum9DtwSzJezZ8MHgPzl1RIazPgnbNcYwcaimwfiwV?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/frtlbbduaaGpE3w86JRxliP6403MHIWN7RF0CERdLb47C5uocX5t0A5IVRJXpVF4X6IiuoDX9atmimw8Fm-LaQGGDm-kTw_MXeZXj4x1FabfwNpPdQ6sglSF3EKqPzw_oLCyRZ-jK4nde2iLa3ZkK4M5nA6s0UR3DcrkWLVbs7Y?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/l1ZY-okAjwQp_NR6PzOo7dj53HnvRa9YY_XqcYGA4v2NobVYNG5jgqxFiTckPbfCvlYJy0osGyvKOcyseIfy9SNPd-Cz8C4mfC7aElx2MQqBXl4D-QJP3kVihVzdSwsVRn_227qCGSJO38nNfX9usmhODARhp-GzvexNLP8xZUs?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/l6QZWSHy2OZSCGFtBi7cvbZBwSgFSQNokdSYwVg9ssProoXRUSE-nNMYpXShSeWDEO0TlWgTJtcB5BohLlSE5NRMSQzyIEY4vgXssu_md22uaKkXBNUQ-CkAHb6UE4nV4KMuFch6VqHK-c1ol0wNRnW0Tl9cqnPlSUr3LzpEUsI?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/nrHmqPiV1-YA4i0XLKjOVoQ2lK_22OkmQUO5deWqYhZbP5mxIshpf0CBM8lcTWrv2lX1PYhTz7MT7O6n-CcFJll8PPUWmiAhDrQg-Dcp5pMyMLb8nLkAAp-cp6OGe8rgFMJpRktuMRqDt5SrenGBHrlBtMOeWIB303irn45pn7YRUlKa1sT3ft8ps6-vf0kq?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/q1HRAAKvlo_77sjGLtgV29npFWZSBT-8r-3GE7kXfWndlNhULeVWUPQDdS7MHmYhfzQk8y7p9kPDT-FieWSFQC8zi7UytusUJLJKTb4FQ4auuME2nAAFvBKpt09oCilumZ81RWi-bhAZ7AJRA7vKo5vd5yDGY0E3qG2BpDDDr8M?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/zfa-aDfc-K4DwkMtm8SRBuaLij_5D8YdhegMorC0ZXeLrc-u7ub0TtRL4aGudeoLVUJJ8DmK9nnWK1wkFoFidQnaaWjooXqLvVuG6Ge8uN-uyXy4sp3xCi52l5j5jK5kf2S7n9iIrHwEvSVqMfTifcLj0WaaoZEuxxshRbA70fk?purpose=inline
+
+### chat_3.html
+- imgタグ: 14個
+- 埋込画像をローカル保存: 1個
+- 外部画像URL: 13件（ユニーク）
+- 未取得: https://images.openai.com/static-rsc-4/Bv4MEg9N8KK_U4Vns8ucO-QYQxcEoFEJFAACTI7dUp7oIDRCQ6fwzEp5fNpEO2-PmZt_IyktLv-7C7XAi9cDNC608HASrtcUzhfEkRmJSh_KW2EFz6ZZLqvvYlpA1VmJ-WRL9Rf4I5ubXdsKvrKoKASQxhNtkdcnRru_i3tmKRc?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/IbpjKUsLoWQBstqbRzTMVHYCrxPrBfLPtDWZvBrHERdqO8Gxcw2ze-tvAHk65Gv30MPaN4ssd7j6FY3AZkT8mKNEj5kkmMqeGiTo4TcNyDQIX3BSV_TS4kPv5AcS9QlAtIr2Bxphv6vMA2thUdvZBYVIpmXD-qBuAacWZDZ_jh05LLc_sp4SMWv-vtYabwiu?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/LtOhOS-Tpb0liPY3nvcz01vwJ2Z83LY5VNZM64RsSXaSF-JExoA4dRRBt42Nv9pg3ZPiRNnnXD_7EsrUt70zknY285mqwOOkSMeedLZSsdsP5axAzVl7SVfDDU2YOr5bse5ObyhmSlujNw1z9SzWQmkda4nn9PpLRbAS-ItG5sM?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/Nx0soRo3DFaluGKs--IARt1z9EDcW6UKAHn-bP3EWn2vU_w9sNkX-xmPan9uAWyRv2xpOpEffTiymLHgSE20lSrlAj0IieV2TxAMlSIlnGFbGe_Py2RZyedvd-EYqEy5m8FGl212ahq_-J-PgdvhFqI8OhnwTZ_qa6AHQw9Gja0?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/VmD5HIYg4AtL_xZixb59Js9HC6W6Ip8oHx0AXYm_dokeHhRRRAa4SZEXH824dex4MIvFix45yS46tdMh3BHsoLVBM1zy92SBFzyhVJpzgmIDpsIzBAwh3ePJIeZg-FYqVfVpGtuQQ2dxyWYmlzcKmZsNa1_dYxROh4tKA7YeJyLkwVYZr8QD2HJhEpK89ax-?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/_YBT7qreFi9_Y2YVsaHA8vCFZl3fDKXo8t0Dq-HPDc-lb88H-NWhbKPyaQrHMfWi4Pc8fhxre2je7Wt4bjHZXIMmEHPJ9o4SHvp-th5wX2S8zbAdT_UkDj2t9wYEZt3lQRqsIc0XImWbsXFL9hniIx3HusKviYo1bMweHvBNZ-o?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/aibNG-ufG_rzpgJgdVNNBmB3KiaijbcUiJCosOAx1mTwNk3NtdcGntiVoPRmM2GFqpDE-CewkonVaIaFAnBeRmWiJl9PTHnE4CWp3hLN2m8XhEKyhJNJIg_1um_wUwtPMngLnKr45s6D08zaFwfY-poum9DtwSzJezZ8MHgPzl1RIazPgnbNcYwcaimwfiwV?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/frtlbbduaaGpE3w86JRxliP6403MHIWN7RF0CERdLb47C5uocX5t0A5IVRJXpVF4X6IiuoDX9atmimw8Fm-LaQGGDm-kTw_MXeZXj4x1FabfwNpPdQ6sglSF3EKqPzw_oLCyRZ-jK4nde2iLa3ZkK4M5nA6s0UR3DcrkWLVbs7Y?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/l1ZY-okAjwQp_NR6PzOo7dj53HnvRa9YY_XqcYGA4v2NobVYNG5jgqxFiTckPbfCvlYJy0osGyvKOcyseIfy9SNPd-Cz8C4mfC7aElx2MQqBXl4D-QJP3kVihVzdSwsVRn_227qCGSJO38nNfX9usmhODARhp-GzvexNLP8xZUs?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/l6QZWSHy2OZSCGFtBi7cvbZBwSgFSQNokdSYwVg9ssProoXRUSE-nNMYpXShSeWDEO0TlWgTJtcB5BohLlSE5NRMSQzyIEY4vgXssu_md22uaKkXBNUQ-CkAHb6UE4nV4KMuFch6VqHK-c1ol0wNRnW0Tl9cqnPlSUr3LzpEUsI?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/nrHmqPiV1-YA4i0XLKjOVoQ2lK_22OkmQUO5deWqYhZbP5mxIshpf0CBM8lcTWrv2lX1PYhTz7MT7O6n-CcFJll8PPUWmiAhDrQg-Dcp5pMyMLb8nLkAAp-cp6OGe8rgFMJpRktuMRqDt5SrenGBHrlBtMOeWIB303irn45pn7YRUlKa1sT3ft8ps6-vf0kq?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/q1HRAAKvlo_77sjGLtgV29npFWZSBT-8r-3GE7kXfWndlNhULeVWUPQDdS7MHmYhfzQk8y7p9kPDT-FieWSFQC8zi7UytusUJLJKTb4FQ4auuME2nAAFvBKpt09oCilumZ81RWi-bhAZ7AJRA7vKo5vd5yDGY0E3qG2BpDDDr8M?purpose=inline
+- 未取得: https://images.openai.com/static-rsc-4/zfa-aDfc-K4DwkMtm8SRBuaLij_5D8YdhegMorC0ZXeLrc-u7ub0TtRL4aGudeoLVUJJ8DmK9nnWK1wkFoFidQnaaWjooXqLvVuG6Ge8uN-uyXy4sp3xCi52l5j5jK5kf2S7n9iIrHwEvSVqMfTifcLj0WaaoZEuxxshRbA70fk?purpose=inline
